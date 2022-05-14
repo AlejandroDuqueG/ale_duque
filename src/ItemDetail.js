@@ -1,22 +1,69 @@
-import Contador from "./Contador"
+import { useContext, useState } from 'react'
+import Hijo from './Hijo';
+import { contexto } from './miContexto';
 
-const ItemDetail = ({producto}) => {
+const ItemDetail = () => {
 
-  const onAdd = (contador) => {
-   console.log(contador)
+  const [nombre, setNombre] = useState('');
+  const { agregarProducto } = useContext(contexto)
+
+  const handleClickDefault = (e) => {
+    e.preventDefault()
+  }
+
+  const handleClick = (numeroDelContadorDelHijo) => {
+    console.log("Click del padre")
+  }
+
+  const handleChange = (e) => {
+    if (e.target.value !== "") {
+      setNombre(e.target.value)
     }
+  }
+
+  const handleFocus = () => {
+  }
+
+  const handleBlur = () => {
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("Submit")
+    console.log(nombre)
+  }
+
+  const handleAddCarrito = () => {
+    agregarProducto({
+      id: 1,
+      nombre : "Producto 1",
+      precio : 100,
+      cantidad : 1
+    })
+  }
 
   return (
-    
+    <div>
+      <form onSubmit={handleSubmit}>
+        {/* <button onClick={()=>handleClick("Click")}>click</button> */}
+        <a href="http://google.com" onClick={handleClickDefault}>ir a Google!</a>
+        <input type="text" name="username" onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+        <button onClick={handleClick}>click</button>
+        <Hijo onClick={handleClick} />
+      </form>
 
 
-      <div> <h1>Detalle del producto</h1>
-      <p>{producto.nombre}
+      <h1>Detalle del producto</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Pellentesque euismod, urna eu tincidunt consectetur,
+        nisi nisl tincidunt nisi, eget porttitor nisl nisi eu
+        urna.
       </p>
-      <img src="https://via.placeholder.com/300" alt=""/>
-      <p>Precio : {producto.precio}</p>
-       <Contador stock={10} init={1} onAdd={onAdd}/>
-       
+      <img src="https://via.placeholder.com/300" alt="" />
+      <p>Precio : $100</p>
+
+      <button onClick={handleAddCarrito}>terminar mi compra</button>
     </div>
   )
 }

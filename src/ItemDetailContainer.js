@@ -1,40 +1,34 @@
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import ItemDetail from "./ItemDetail"
-import {useParams} from "react-router-dom"
 import productosIniciales from "./productos.json"
+import { db } from "./firebase"
 
 const ItemDetailContainer = () => {
 
-  const {id} = useParams()
   const [cargando,setCargando] = useState(true)
-  const  [producto,setProducto] = useState({})
+  const [producto,setProducto] = useState({})
+  const {id} = useParams()
 
   useEffect(()=>{
-    
-    
-    const pedido = new Promise((res)=>{
-      setTimeout(()=>{
-        res(productosIniciales)
-      },500)
-    })
-
-  
-    pedido
-    .then((res)=>{
-      setCargando(false)
-      setProducto(res.find((item)=>item.id == id))
-    })
-  }, [id])
+    const resultado = productosIniciales.filter((producto)=>{
+      return producto.id == id
+    })[0]
+    setProducto(resultado)
+    setCargando(false)
+  })
 
   if(cargando){
-    return(
-      <p>cargando...</p>
+    return (
+      <p>Cargando...</p>
     )
   }else{
     return (
-      <ItemDetail producto={producto}/>
+      <>
+        <ItemDetail/>
+      </>
     )
   }
-    
 }
+
 export default ItemDetailContainer
