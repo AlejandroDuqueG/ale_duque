@@ -6,9 +6,9 @@ const NavBar = ({ footer, nombre }) => {
     <nav className="nav">
       {!footer && <Link to="#">{nombre}</Link>}
       <CartWidget />
-      <Link to="/productos/electronicos" className="nav__link">electronicos</Link>
-      <Link to="/productos/alimentos" className="nav__link">alimentos</Link>
-      <Link to="/productos/ropa" className="nav__link">ropa</Link>
+      <Link to="/productos/chocolateLiquido" className="nav__link">Chocolate Liquido  </Link>
+      <Link to="/productos/chocolateBarra" className="nav__link">Chocolate en barra  </Link>
+      <Link to="/productos/chocolateMesa" className="nav__link">Chocolate de Mesa  </Link>
     </nav>
   )
 };

@@ -31,7 +31,8 @@ const ItemListContainer = () => {
       .then((resultado)=>{
       
         const productos = resultado.docs.map(doc=>{
-
+          
+          console.log(doc.id)
           const productoConId = doc.data()
           productoConId.id = doc.id
           

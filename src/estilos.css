@@ -32,7 +32,7 @@ padre hijo {
 }
 
 .header {
-  background-color: yellow;
+  background-color: brown;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,7 +46,7 @@ padre hijo {
 }
 
 .footer {
-  background-color: yellow;
+  background-color: brown;
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
