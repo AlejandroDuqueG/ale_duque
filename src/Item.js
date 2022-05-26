@@ -10,11 +10,13 @@ const Item = ({producto}) => {
 
   return (
     <article className="card">
-      <h3>{producto.titulo}</h3>
+      <h3>{producto.Descripcion}</h3>
       {/* <img src="https://via.placeholder.com/300x300" alt="card"/> */}
       <img src={producto.imagen}/>
-      <p>Precio : ${producto.precio}</p>
-      <p>Categorias : {producto.categoria}{} </p>
+      <p>Precio : ${producto.Precio}</p>
+      <p>Categorias : {producto.categorias}{/*producto.categoria.map(categoria=>{
+        return <span>{/*categoria}</span>
+      }) */} </p>
       <button onClick={handleClick}>ver mas</button>
     </article>
   )
