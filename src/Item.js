@@ -12,7 +12,7 @@ const Item = ({producto}) => {
     <article className="card">
       <h3>{producto.Descripcion}</h3>
       {/* <img src="https://via.placeholder.com/300x300" alt="card"/> */}
-      <img src={producto.imagen}/>
+      <img src={producto.imagen} alt="card"/>
       <p>Precio : ${producto.Precio}</p>
       <p>Categorias : {producto.categorias}{/*producto.categoria.map(categoria=>{
         return <span>{/*categoria}</span>

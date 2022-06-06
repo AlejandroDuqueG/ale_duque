@@ -1,54 +1,58 @@
-import { createContext, useState } from "react"
-import { toast } from "react-toastify"
+import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
-export const contexto = createContext()
-const { Provider } = contexto
+export const contexto = createContext();
+const { Provider } = contexto;
 
+const MiCustomProvider = ({ children }) => {
+  const [carrito, setCarrito] = useState([]);
+  const [total, setTotal] = useState(0);
 
-const MiCustomProvider = ({children}) => {
+  const addItem = (contador, producto, id) => {
+    let cartProduct = { producto, contador, id };
 
-  const [carrito,setCarrito] = useState([])
-  const [cantidadTotal,setCantidadTotal] = useState(0)
-  const [precioTotal,setPrecioTotal] = useState(0)
-  
+    let cartAux = [];
 
-  const agregarProducto = (producto) => {
-    if(estaEnCarrito(producto.id)){
-      toast.info("El producto ya está en el carrito!")
-    }else{
-      setCantidadTotal(cantidadTotal + producto.cantidad)
-      setPrecioTotal(precioTotal + producto.precio)
-      setCarrito([...carrito,producto])
+    if (isInCart(id)) {
+      cartProduct = carrito.find((item) => item.id === id);
+
+      cartProduct.contador = cartProduct.contador + contador;
+
+      cartAux = [...cartProduct];
+    } else {
+      cartAux = [cartProduct, ...carrito];
     }
-  }
+    setCarrito(cartAux);
+  };
 
-  const eliminarProducto = (id) => {
-    
-  }
+  const IconCart = () => {
+    return carrito.reduce((acum, i) => acum + i.contador, 0);
+  };
 
-  const vaciarCarrito = () => {
-    setCarrito([])
-  }
+  const PriceTotal = () => {
+    return carrito.reduce((acum, i) => acum + i.contador * i.producto.Precio, 0);
+  };
 
-  const estaEnCarrito = (id) => {
-    return carrito.find(productoCarrito=>productoCarrito.id == id)
-  }
+  const removeItem = (id) => {
+    setCarrito(carrito.filter((item) => item.id !== id));
+  };
+  const clearCart = () => {
+    setCarrito([]);
+  };
+  const isInCart = (id) => {
+    return carrito && carrito.some((item) => item.producto.id === id);
+  };
 
   const valorDelContexto = {
-    cantidadTotal ,
-    precioTotal ,
-    carrito ,
-    agregarProducto ,
-    eliminarProducto , 
-    vaciarCarrito ,
-    estaEnCarrito
-  }
+    carrito,
+    addItem,
+    removeItem,
+    clearCart,
+    IconCart,
+    PriceTotal
+  };
 
-  return (
-    <Provider value={valorDelContexto} >
-      {children}
-    </Provider>
-  )
-}
+  return <Provider value={valorDelContexto}>{children}</Provider>;
+};
 
-export default MiCustomProvider
+export default MiCustomProvider;

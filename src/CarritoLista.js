@@ -14,4 +14,4 @@ const CarritoLista = ({usuarios}) => {
   )
 }
 
-export default /* memo( */CarritoLista/* ) */
+export default CarritoLista

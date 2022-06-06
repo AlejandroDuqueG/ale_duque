@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import ItemDetail from "./ItemDetail"
-import productosIniciales from "./productos.json"
 import { db } from "./firebase"
 import { getDoc , doc , collection  } from "firebase/firestore"
 
@@ -27,7 +26,7 @@ const ItemDetailContainer = () => {
         console.log(error)
         setCargando(false)
       })
-  })
+  },[id])
 
   if(cargando){
     return (
@@ -36,7 +35,8 @@ const ItemDetailContainer = () => {
   }else{
     return (
       <>
-        <ItemDetail producto={producto}/>
+        <ItemDetail producto={producto} id ={id}/>
+        {console.log(producto)}
       </>
     )
   }
