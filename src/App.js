@@ -4,6 +4,7 @@ import Main from "./Main"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { BrowserRouter } from "react-router-dom"
+import { CartWidget } from "./CartWidget"
 import MiCustomProvider from "./miContexto"
 
 const App = () => {
@@ -20,3 +21,5 @@ const App = () => {
 }
 
 export default App
+
+
